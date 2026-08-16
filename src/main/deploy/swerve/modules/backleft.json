@@ -1,17 +1,17 @@
 {
   "location": {
-    "front": -10.75,
-    "left": 11.5
+    "front": -14,
+    "left": 13.5
   },
   "absoluteEncoderOffset": -0.359,
   "drive": {
     "type": "krakenx60",
-    "id": 4,
+    "id": 2,
     "canbus": null
   },
   "angle": {
-    "type": "krakenx60",
-    "id": 5,
+    "type": "sparkflex_neo",
+    "id": 6,
     "canbus": null
   },
   "encoder": {
