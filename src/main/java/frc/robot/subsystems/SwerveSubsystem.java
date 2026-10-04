@@ -11,15 +11,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import java.io.File;
 import java.util.function.Supplier;
-
-import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 
@@ -66,34 +63,26 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   @Override
-public void periodic() {
+  public void periodic() {
     var modules = swerveDrive.getModules();
 
     for (int i = 0; i < modules.length; i++) {
 
-        // Current angle reported by the swerve module
-        double currentAngle =
-            modules[i].getState().angle.getDegrees();
+      // Current angle reported by the swerve module
+      double currentAngle = modules[i].getState().angle.getDegrees();
 
-        // Current wheel speed
-        double speed =
-            modules[i].getState().speedMetersPerSecond;
+      // Current wheel speed
+      double speed = modules[i].getState().speedMetersPerSecond;
 
-        SmartDashboard.putNumber(
-            "Swerve/Module" + i + "/Current Angle",
-            currentAngle
-        );
+      SmartDashboard.putNumber("Swerve/Module" + i + "/Current Angle", currentAngle);
 
-        SmartDashboard.putNumber(
-            "Swerve/Module" + i + "/Speed",
-            speed
-        );
+      SmartDashboard.putNumber("Swerve/Module" + i + "/Speed", speed);
     }
-}
-/*modules[0] → frontleft.json
-modules[1] → frontright.json
-modules[2] → backleft.json
-modules[3] → backright.json*/
+  }
+  /*modules[0] → frontleft.json
+  modules[1] → frontright.json
+  modules[2] → backleft.json
+  modules[3] → backright.json*/
 
   @Override
   public void simulationPeriodic() {
@@ -109,16 +98,17 @@ modules[3] → backright.json*/
   public void driveFieldOriented(ChassisSpeeds velocity) {
     swerveDrive.driveFieldOriented(velocity);
   }
-  public Command driveFieldOriented(Supplier<ChassisSpeeds> velocity){
-    return run(() -> {
-        ChassisSpeeds speeds = velocity.get();
 
-        SmartDashboard.putNumber("Swerve/VX", speeds.vxMetersPerSecond);
-        SmartDashboard.putNumber("Swerve/VY", speeds.vyMetersPerSecond);
-        SmartDashboard.putNumber("Swerve/Omega", speeds.omegaRadiansPerSecond);
+  public Command driveFieldOriented(Supplier<ChassisSpeeds> velocity) {
+    return run(
+        () -> {
+          ChassisSpeeds speeds = velocity.get();
 
-        swerveDrive.driveFieldOriented(speeds);
-       
-    });
-}
+          SmartDashboard.putNumber("Swerve/VX", speeds.vxMetersPerSecond);
+          SmartDashboard.putNumber("Swerve/VY", speeds.vyMetersPerSecond);
+          SmartDashboard.putNumber("Swerve/Omega", speeds.omegaRadiansPerSecond);
+
+          swerveDrive.driveFieldOriented(speeds);
+        });
+  }
 }

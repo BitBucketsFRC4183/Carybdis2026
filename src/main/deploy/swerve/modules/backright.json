@@ -17,10 +17,10 @@
   "absoluteEncoder": {
     "type": "thrifty_analog",
     "id": 0,
-    "channel": 0,
+    "channel": 2,
     "canbus": ""
   },
-  "absoluteEncoderOffset": 0,
+  "absoluteEncoderOffset": 0.854,
   "absoluteEncoderInverted": false,
   "location": {
     "front": -14,
